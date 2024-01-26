@@ -23,7 +23,7 @@ export const columns: ColumnDef<Records>[] = [
     header: "VisitorId",
   },
   {
-    accessorKey: "name",
+    accessorKey: "visitorName",
     header: "Visitor Name",
   },
   {
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Records>[] = [
     header: "Date",
     cell: ({ row }) => (
       <div className="flex">
-        {row.original.outTime ? format(row.original.createdAt, "PP") : "NAN"}
+        {row.original.createdAt ? format(row.original.createdAt, "PP") : "NAN"}
       </div>
     ),
   },

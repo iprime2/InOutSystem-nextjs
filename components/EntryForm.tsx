@@ -66,7 +66,7 @@ const EntryForm = () => {
   };
 
   return (
-    <div className="lg:mt-2 mx-auto md:w-[100%] lg:w-[50%] xl:w-[50%] h-[200px] bg-white rounded-2xl p-6">
+    <div className="mx-auto md:w-[100%] lg:w-[60%] xl:w-[60%] bg-white rounded-2xl py-2">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -89,7 +89,7 @@ const EntryForm = () => {
               </FormItem>
             )}
           />
-          <Button disabled={loading} className="ml-auto" type="submit">
+          <Button disabled={loading} className="ml-auto w-full" type="submit">
             Submit
           </Button>
         </form>

@@ -1,6 +1,7 @@
 import { getRecords } from "@/actions/getRecords";
 import { DataTable } from "@/components/DataTable";
 import EntryForm from "@/components/EntryForm";
+import Navbar from "@/components/Navbar";
 import { columns } from "@/components/columns";
 
 export default async function Home() {
@@ -8,11 +9,11 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col">
-      <div className="w-full h-[80px] bg-slate-900"></div>
+      <Navbar />
       <div className="w-full h-screen flex flex-col items-center">
         <EntryForm />
 
-        <div className="sm:w-full md:w-[60%] px-26">
+        <div className="sm:w-full md:w-[60%] h-full">
           {records ? (
             <DataTable columns={columns} data={records} searchKey="VisitorId" />
           ) : (
