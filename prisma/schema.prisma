@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id        String   @id @default(uuid())
+  name      String
+  prn       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // record Record[] @relation("recordtostudent")
+}
+
+model Teacher {
+  id        String   @id @default(uuid())
+  name      String
+  prn       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // record Record[] @relation("recordtoteacher")
+}
+
+model Record {
+  id          String    @id @default(uuid())
+  visitorId   String
+  visitorName String
+  studentId   String?
+  // student    Student?  @relation("recordtostudent", fields: [studentId], references: [id])
+  teacherId   String?
+  // teacher    Teacher?  @relation("recordtoteacher", fields: [teacherId], references: [id])
+  in          Boolean   @default(true)
+  out         Boolean   @default(false)
+  inTime      DateTime  @default(now())
+  outTime     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
