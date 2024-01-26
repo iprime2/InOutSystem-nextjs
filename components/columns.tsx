@@ -2,6 +2,7 @@
 
 import { format, formatDistanceToNow } from "date-fns";
 import { ColumnDef } from "@tanstack/react-table";
+import { cn } from "@/lib/utils";
 
 export type Records = {
   id: string;
@@ -20,7 +21,7 @@ export type Records = {
 export const columns: ColumnDef<Records>[] = [
   {
     accessorKey: "visitorId",
-    header: "VisitorId",
+    header: "Visitor Id",
   },
   {
     accessorKey: "visitorName",
@@ -46,7 +47,12 @@ export const columns: ColumnDef<Records>[] = [
     accessorKey: "Total Time",
     header: "Total Time",
     cell: ({ row }) => (
-      <div className="flex">
+      <div
+        className={cn(
+          "flex p-1 text-white",
+          row.original.outTime ? "bg-green-500" : "bg-red-500"
+        )}
+      >
         {row.original.inTime ? formatDistanceToNow(row.original.inTime) : "NAN"}
       </div>
     ),

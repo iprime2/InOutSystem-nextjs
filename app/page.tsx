@@ -15,7 +15,7 @@ export default async function Home() {
 
         <div className="sm:w-full md:w-[60%] h-full">
           {records ? (
-            <DataTable columns={columns} data={records} searchKey="VisitorId" />
+            <DataTable columns={columns} data={records} searchKey="visitorId" />
           ) : (
             "No Records!!"
           )}
