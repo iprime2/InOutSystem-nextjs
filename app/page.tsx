@@ -3,9 +3,16 @@ import { DataTable } from "@/components/DataTable";
 import EntryForm from "@/components/EntryForm";
 import Navbar from "@/components/Navbar";
 import { columns } from "@/components/columns";
+import { prismaClient } from "@/lib/prismaClient";
+import { useEffect } from "react";
 
 export default async function Home() {
-  const records = await getRecords();
+  "use server";
+  const records = await prismaClient.record.findMany({
+    orderBy: {
+      inTime: "desc",
+    },
+  });
 
   return (
     <div className="flex flex-col">
