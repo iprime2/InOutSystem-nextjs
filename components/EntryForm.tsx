@@ -40,11 +40,12 @@ const EntryForm = () => {
 
     try {
       await axios.post(`/api/record`, data);
-      router.refresh();
       toast({
         description: "Entry done!",
         variant: "success",
       });
+      // router.refresh();
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
       if (error?.response?.data) {

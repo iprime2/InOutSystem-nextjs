@@ -1,6 +1,20 @@
 import { prismaClient } from "@/lib/prismaClient";
 import { NextResponse } from "next/server";
 
+export async function GET(req: Request) {
+  try {
+    const records = await prismaClient.record.findMany({
+      orderBy: {
+        inTime: "desc",
+      },
+    });
+    return NextResponse.json(records);
+  } catch (error) {
+    console.log("GET_RECORDS");
+    console.log("Error:" + error);
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const { prn } = await req.json();
