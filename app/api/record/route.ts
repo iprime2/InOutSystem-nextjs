@@ -1,4 +1,4 @@
-import { db } from "@/lib/prismaClient";
+import { prismaClient } from "@/lib/prismaClient";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
       return new Response("ID MISSING", { status: 400 });
     }
 
-    const recordExists = await db.record.findMany({
+    const recordExists = await prismaClient.record.findMany({
       where: {
         visitorId: prn,
         out: false,
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     });
 
     if (recordExists.length > 0) {
-      const updateRecord = await db.record.updateMany({
+      const updateRecord = await prismaClient.record.updateMany({
         where: {
           visitorId: prn,
         },
@@ -30,13 +30,13 @@ export async function POST(req: Request) {
       return NextResponse.json(updateRecord);
     }
 
-    const student = await db.student.findMany({
+    const student = await prismaClient.student.findMany({
       where: {
         prn,
       },
     });
 
-    const teacher = await db.teacher.findMany({
+    const teacher = await prismaClient.teacher.findMany({
       where: {
         prn,
       },
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     let record;
 
     if (student.length > 0) {
-      record = await db.record.create({
+      record = await prismaClient.record.create({
         data: {
           visitorId: prn,
           visitorName: student[0]?.name,
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
         },
       });
     } else if (teacher.length > 0) {
-      record = await db.record.create({
+      record = await prismaClient.record.create({
         data: {
           visitorId: prn,
           visitorName: teacher[0]?.name,

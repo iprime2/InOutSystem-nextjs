@@ -1,8 +1,8 @@
-import { db } from "@/lib/prismaClient";
+import { prismaClient } from "@/lib/prismaClient";
 
 export const getRecords = async () => {
   try {
-    const records = await db.record.findMany({
+    const records = await prismaClient.record.findMany({
       orderBy: {
         inTime: "desc",
       },
